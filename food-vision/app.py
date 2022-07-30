@@ -1,4 +1,3 @@
-### Script for CS329s ML Deployment Lec 
 import os
 import json
 import requests
@@ -7,12 +6,10 @@ import streamlit as st
 import tensorflow as tf
 from utils import load_and_prep_image, classes_and_models, update_logger, predict_json
 
-# Setup environment credentials (you'll need to change these)
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "daniels-dl-playground-4edbcb2e6e37.json" # change for your GCP key
-PROJECT = "daniels-dl-playground" # change for your GCP project
-REGION = "us-central1" # change for your GCP region (where your model is hosted)
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "MasterWayne-playground-4edbcb2e6e37.json" 
+PROJECT = "MasterWayne-playground"
+REGION = "us-central1" 
 
-### Streamlit code (works as a straigtht-forward script) ###
 st.title("Welcome to Food Vision 🍔📸")
 st.header("Identify what's in your food photos!")
 
@@ -66,8 +63,7 @@ if st.checkbox("Show classes"):
 uploaded_file = st.file_uploader(label="Upload an image of food",
                                  type=["png", "jpeg", "jpg"])
 
-# Setup session state to remember state of app so refresh isn't always needed
-# See: https://discuss.streamlit.io/t/the-button-inside-a-button-seems-to-reset-the-whole-app-why/1051/11 
+ 
 session_state = SessionState.get(pred_button=False)
 
 # Create logic for app flow
@@ -97,7 +93,7 @@ if session_state.pred_button:
         pass
     elif session_state.feedback == "Yes":
         st.write("Thank you for your feedback!")
-        # Log prediction information to terminal (this could be stored in Big Query or something...)
+        # Log prediction information to terminal
         print(update_logger(image=session_state.image,
                             model_used=MODEL,
                             pred_class=session_state.pred_class,
@@ -107,7 +103,7 @@ if session_state.pred_button:
         session_state.correct_class = st.text_input("What should the correct label be?")
         if session_state.correct_class:
             st.write("Thank you for that, we'll use your help to make our model better!")
-            # Log prediction information to terminal (this could be stored in Big Query or something...)
+            # Log prediction information to terminal
             print(update_logger(image=session_state.image,
                                 model_used=MODEL,
                                 pred_class=session_state.pred_class,
