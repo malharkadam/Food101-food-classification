@@ -1,5 +1,6 @@
 # Food_Vision
 
+## DeepFood Paper: https://acrobat.adobe.com/link/review?uri=urn:aaid:scds:US:655747d1-2d84-3d10-b3fc-e00000a7d3d3
 ### Use TensorFlow Datasets to Download Data
 
 For many of the most popular datasets in the machine learning world (often referred to and used as benchmarks), you can access them through TensorFlow Datasets (TFDS).
